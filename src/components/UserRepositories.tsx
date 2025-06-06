@@ -23,7 +23,7 @@ const UserRepositories: React.FC<UserRepositoriesProps> = ({ username, onClose }
       setError(null);
 
       try {
-        const repos = await getUserRepositories(username, pageNum, 6);
+        const repos = await getUserRepositories(username, pageNum, 8);
 
         if (append) {
           setRepositories((prev) => [...prev, ...repos]);
@@ -32,7 +32,7 @@ const UserRepositories: React.FC<UserRepositoriesProps> = ({ username, onClose }
           setHasLoaded(true);
         }
 
-        setHasMore(repos.length === 6);
+        setHasMore(repos.length === 8);
         setPage(pageNum);
       } catch (err) {
         setError(err instanceof Error ? err.message : "Failed to load repositories");
@@ -94,7 +94,7 @@ const UserRepositories: React.FC<UserRepositoriesProps> = ({ username, onClose }
           )}{" "}
           {repositories.length > 0 && (
             <>
-              <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 mb-8">
+              <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mb-8">
                 {repositories.map((repo) => (
                   <RepositoryCard key={repo.id} repository={repo} />
                 ))}
